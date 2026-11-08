@@ -555,22 +555,29 @@ export default function Home() {
         </div>
       </header>
       <main>
+        <aside className="estimate-notice" role="note" aria-labelledby="estimate-notice-title">
+          <Info size={18} strokeWidth={1.75} aria-hidden="true" focusable="false" />
+          <div>
+            <strong id="estimate-notice-title" className="estimate-notice-title">
+              {t.estimateNoticeTitle}
+            </strong>
+            <p className="estimate-notice-message">{t.estimateNoticeMessage}</p>
+          </div>
+        </aside>
         {storageError && (
           <div className="error" role="alert">
             {t[storageError]}
           </div>
         )}
-        <div className="page-heading">
+        <div className={`page-heading ${tab === "Overview" ? "page-toolbar" : ""}`}>
           <div>
             <div className="eyebrow heading-date">
               <span className="tiny-star">✦</span>
               {fmt(today, { weekday: "long", month: "long", day: "numeric" })}
             </div>
-            <h1>
+            <h1 className={tab === "Overview" ? "sr-only" : undefined}>
               {tab === "Overview" ? (
-                <>
-                  {t.headingA} <em>{t.headingB}</em>
-                </>
+                t.overview
               ) : tab === "Calendar" ? (
                 <>
                   {t.calendarA} <em>{t.calendarB}</em>
@@ -581,7 +588,7 @@ export default function Home() {
                 </>
               )}
             </h1>
-            <p>{tab === "History" ? t.historySubtitle : t.subtitle}</p>
+            {tab !== "Overview" && <p>{tab === "History" ? t.historySubtitle : t.subtitle}</p>}
           </div>
           <button className="primary" onClick={() => openPeriod()}>
             <Plus size={18} />

@@ -1,5 +1,8 @@
 export type Locale = "vi" | "en";
 const en = {
+  estimateNoticeTitle: "Calendar estimates only",
+  estimateNoticeMessage:
+    "Cycle and fertile-day estimates are approximate. Do not rely on them to prevent pregnancy. Use reliable contraception.",
   appVersion: "App version",
   trackingMode: "Calculation mode",
   autoMode: "Automatic",
@@ -293,6 +296,9 @@ const en = {
     "After the first online visit, your calendar and cycle chart can work offline. Data stays in this browser’s storage.",
 };
 const vi: typeof en = {
+  estimateNoticeTitle: "Chỉ mang tính tham khảo",
+  estimateNoticeMessage:
+    "Ngày kinh nguyệt và ngày dễ thụ thai chỉ là ước tính. Không dùng kết quả này để tránh thai. Hãy sử dụng biện pháp tránh thai đáng tin cậy.",
   appVersion: "Phiên bản ứng dụng",
   trackingMode: "Chế độ tính toán",
   autoMode: "Tự động",

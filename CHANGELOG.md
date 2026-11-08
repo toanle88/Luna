@@ -6,6 +6,14 @@ been published; see [GitHub Releases](https://github.com/toanle88/Luna/releases)
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-08
+
+### Fixed
+
+- Replace the overview tagline with a compact, permanent Vietnamese/English notice explaining that
+  cycle and fertile-day estimates must not be used as contraception. Keep it above the content in
+  every main-page view, with an information icon and readable contrast.
+
 ## [0.1.1] - 2026-11-08
 
 ### Fixed

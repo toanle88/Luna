@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible problem in Luna.
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value:
+        Use synthetic dates. Do not include personal cycle histories, backup files, or credentials.
+        For vulnerabilities, see SECURITY.md.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe expected and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include a minimal example using fictional dates.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Luna version/commit, browser, OS, installed PWA or browser tab
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized logs or screenshots
+      description: Remove all personal information before sharing.

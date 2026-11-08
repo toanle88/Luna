@@ -1,17 +1,26 @@
 {
-  "name": "site-creator-vinext-starter",
+  "name": "luna-period-tracker",
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22.13.0"
+    "node": "^22.13.0 || ^24.0.0"
   },
   "scripts": {
-    "install:ci": "bash scripts/install-pnpm.sh",
+    "install:ci": "pnpm install --frozen-lockfile",
     "dev": "node scripts/run-framework.mjs dev",
-    "build": "node scripts/run-framework.mjs build",
+    "build": "node scripts/run-framework.mjs build && node scripts/generate-pwa.mjs && node scripts/validate-pwa.mjs",
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "lint": "eslint . --max-warnings=0",
+    "db:generate": "drizzle-kit generate",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/test.mjs",
+    "test:watch": "node scripts/test.mjs --watch",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check",
+    "release:check": "node scripts/check-release.mjs",
+    "docs:check": "node scripts/check-docs.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -51,7 +60,9 @@
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.4",
+    "eslint-config-prettier": "10.1.8",
     "json-rpc-2.0": "1.7.1",
+    "prettier": "3.9.10",
     "raw-body": "3.0.2",
     "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "4.2.1",
@@ -67,5 +78,15 @@
       "sharp": "0.35.4"
     }
   },
-  "packageManager": "pnpm@11.25.0"
+  "packageManager": "pnpm@11.25.0",
+  "description": "A browser-local period tracker with Vietnamese and English locales, cycle estimates, JSON backups, and PWA support.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toanle88/Luna.git"
+  },
+  "homepage": "https://github.com/toanle88/Luna#readme",
+  "bugs": {
+    "url": "https://github.com/toanle88/Luna/issues"
+  }
 }

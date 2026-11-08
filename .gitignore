@@ -43,3 +43,10 @@ yarn-error.log*
 
 # OS metadata
 .DS_Store
+
+# Editor, OS, and local archives
+.idea/
+*.swp
+Thumbs.db
+*.zip
+*.tar.gz

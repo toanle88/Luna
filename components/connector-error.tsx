@@ -14,10 +14,7 @@ export function ConnectorError({
 }) {
   const recovery = connectorErrorRecovery(error, connectorName, reconnectHref);
   return (
-    <div
-      role="alert"
-      className="flex min-w-0 flex-col items-start gap-3 text-sm"
-    >
+    <div role="alert" className="flex min-w-0 flex-col items-start gap-3 text-sm">
       <p className="break-words">{recovery.message}</p>
       {recovery.action && (
         <Button

@@ -10,8 +10,7 @@ const endpoint = "/__sites_connector_preview/invoke";
 const contextEndpoint = "/__sites_connector_preview/context";
 const unavailable = {
   status: "binding_unavailable",
-  message:
-    "Connected apps need an active agent preview session in this preview.",
+  message: "Connected apps need an active agent preview session in this preview.",
 };
 const uncertain = {
   status: "upstream_error",
@@ -26,9 +25,7 @@ export function connectorPreview() {
   let root;
   let server;
   async function readSession() {
-    const session = JSON.parse(
-      await readFile(path.join(root, "session.json"), "utf8"),
-    );
+    const session = JSON.parse(await readFile(path.join(root, "session.json"), "utf8"));
     if (
       !/^[0-9a-f-]{36}$/.test(session.id) ||
       (session.expiresAt !== null && !(session.expiresAt > Date.now()))
@@ -51,13 +48,7 @@ export function connectorPreview() {
           host: config.server?.host ?? "127.0.0.1",
           strictPort: true,
           fs: {
-            deny: [
-              ".env",
-              ".env.*",
-              "*.{crt,pem}",
-              "**/.git/**",
-              "**/.sites-runtime/**",
-            ],
+            deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "**/.sites-runtime/**"],
           },
           watch: { ignored: ["**/.sites-runtime/**"] },
         },
@@ -71,13 +62,8 @@ export function connectorPreview() {
     },
     load(id, options) {
       if (id !== resolvedId) return;
-      if (
-        this.environment?.name === "client" ||
-        (!this.environment && !options?.ssr)
-      ) {
-        throw new Error(
-          "Connected apps are only available in Site server routes.",
-        );
+      if (this.environment?.name === "client" || (!this.environment && !options?.ssr)) {
+        throw new Error("Connected apps are only available in Site server routes.");
       }
       // Auxiliary Workers load before Vite starts listening. strictPort keeps
       // this configured address stable when the server opens its socket.
@@ -103,10 +89,7 @@ export function connectorPreview() {
       vite.middlewares.use(contextEndpoint, async (req, res) => {
         res.setHeader("Cache-Control", "no-store");
         res.setHeader("Content-Type", "application/json");
-        if (
-          req.method !== "GET" ||
-          req.headers["x-sites-preview"] !== bridgeToken
-        ) {
+        if (req.method !== "GET" || req.headers["x-sites-preview"] !== bridgeToken) {
           res.statusCode = 403;
           res.end(JSON.stringify(unavailable));
           return;
@@ -136,10 +119,7 @@ export function connectorPreview() {
       vite.middlewares.use(endpoint, async (req, res) => {
         res.setHeader("Cache-Control", "no-store");
         res.setHeader("Content-Type", "application/json");
-        if (
-          req.method !== "POST" ||
-          req.headers["x-sites-preview"] !== bridgeToken
-        ) {
+        if (req.method !== "POST" || req.headers["x-sites-preview"] !== bridgeToken) {
           res.statusCode = 403;
           res.end(JSON.stringify(unavailable));
           return;
@@ -150,9 +130,7 @@ export function connectorPreview() {
         try {
           const session = await readSession();
           const raw = await getRawBody(req, { limit: 65536 });
-          const call = JSON.parse(
-            new TextDecoder("utf-8", { fatal: true }).decode(raw),
-          );
+          const call = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(raw));
           const body = JSON.stringify(call);
           const directory = path.join(root, session.id);
           const id = randomUUID();

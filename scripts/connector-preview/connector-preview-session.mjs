@@ -1,22 +1,11 @@
 import { randomUUID } from "node:crypto";
-import {
-  mkdir,
-  readFile,
-  readdir,
-  rename,
-  rm,
-  writeFile,
-} from "node:fs/promises";
+import { mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createInterface } from "node:readline";
 import { parseArgs } from "node:util";
 import { JSONRPCClient } from "json-rpc-2.0";
 import { createPreviewBinding } from "./host-binding.mjs";
-import {
-  driverMessageSchema,
-  grantsSchema,
-  sessionOptionsSchema,
-} from "./protocol.mjs";
+import { driverMessageSchema, grantsSchema, sessionOptionsSchema } from "./protocol.mjs";
 
 // The agent starts this script through its terminal tool after creating a local
 // Site and selecting connector read actions, following references/app-integrations.md#local-preview:
@@ -53,9 +42,7 @@ const limits = sessionOptionsSchema.parse(
       .map(([key, value]) => [key, Number(value)]),
   ),
 );
-const grants = grantsSchema.parse(
-  JSON.parse(await readFile(grantsFile, "utf8")),
-);
+const grants = grantsSchema.parse(JSON.parse(await readFile(grantsFile, "utf8")));
 const root = path.join(project, ".sites-runtime", "connector-preview");
 const id = randomUUID();
 const directory = path.join(root, id);
@@ -89,10 +76,8 @@ const binding = createPreviewBinding({
           arguments: args,
         },
       });
-      if (!closing)
-        emit("receipt", { id: requestId, at: new Date().toISOString() });
-      if (response.error)
-        throw new Error("The agent did not confirm a connector result.");
+      if (!closing) emit("receipt", { id: requestId, at: new Date().toISOString() });
+      if (response.error) throw new Error("The agent did not confirm a connector result.");
       return response.result;
     },
   })),
@@ -105,8 +90,7 @@ try {
     descriptor,
     JSON.stringify({
       id,
-      expiresAt:
-        limits.lifetimeMs === undefined ? null : Date.now() + limits.lifetimeMs,
+      expiresAt: limits.lifetimeMs === undefined ? null : Date.now() + limits.lifetimeMs,
       timeoutMs: limits.timeoutMs,
       connectorIds: [...new Set(grants.map((grant) => grant.connectorId))],
     }),
@@ -125,10 +109,7 @@ async function serve(name) {
       new Request("http://preview/invoke", { method: "POST", body }),
     );
     if (!closing) {
-      const output = path.join(
-        directory,
-        name.replace(".request", ".response"),
-      );
+      const output = path.join(directory, name.replace(".request", ".response"));
       await writeFile(`${output}.tmp`, await response.text(), { mode: 0o600 });
       await rename(`${output}.tmp`, output);
     }
@@ -147,8 +128,7 @@ const poller = setInterval(async () => {
   scanning = true;
   try {
     for (const name of await readdir(directory)) {
-      if (/^[0-9a-f-]{36}\.request$/.test(name) && !active.has(name))
-        void serve(name);
+      if (/^[0-9a-f-]{36}\.request$/.test(name) && !active.has(name)) void serve(name);
     }
   } catch (error) {
     if (!closing) {
@@ -206,8 +186,7 @@ process.on("SIGINT", () => {
   void close();
 });
 emit("ready", {
-  expiresInSeconds:
-    limits.lifetimeMs === undefined ? null : limits.lifetimeMs / 1000,
+  expiresInSeconds: limits.lifetimeMs === undefined ? null : limits.lifetimeMs / 1000,
   maxCalls: limits.maxCalls ?? null,
   maxConcurrent: limits.maxConcurrent,
   timeoutMs: limits.timeoutMs,

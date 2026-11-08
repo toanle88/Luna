@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.next/
+.vinext/
+.wrangler/
+.sites-runtime/
+coverage/
+outputs/
+work/
+pnpm-lock.yaml
+next-env.d.ts
+cloudflare-env.d.ts
+# Preserve upstream source and license formatting.
+components/ui/
+hooks/use-mobile.ts
+vendor/
+scripts/vite/sites-vite-plugin.ts
+scripts/vite/sites-vite-plugin.LICENSE

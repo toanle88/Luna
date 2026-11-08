@@ -8,7 +8,11 @@ records database.
 
 | Module                       | Responsibility                                                                           |
 | ---------------------------- | ---------------------------------------------------------------------------------------- |
-| `app/page.tsx`               | Screen state, calendar selection, logging, settings, and restore confirmation            |
+| `app/page.tsx`               | Main page composition and tab layout                                                     |
+| `lib/use-luna.ts`            | Browser hydration, calendar selection, period/settings actions and persistence           |
+| `lib/use-backup.ts`          | Local file transfer, restore preview/confirmation, and backup activity                   |
+| `lib/backup-reminder.ts`     | Weekly reminder policy using separate optional metadata                                  |
+| `components/`                | Header, calendar, overview, history, summary, and focused dialogs                        |
 | `lib/cycle.ts`               | Date helpers, automatic/manual values, normalized periods, and bounded phase projections |
 | `lib/backup.ts`              | Backup envelope, validation, data preparation, and compatibility                         |
 | `lib/i18n.ts`                | Vietnamese and English labels and messages                                               |
@@ -38,7 +42,10 @@ periods. Incomplete or variable history can hide fertility statuses. Historical 
 use a subsequent logged start. The display is a calendar estimate rather than evidence of ovulation
 or contraceptive safety.
 
-The calculation and its medical reference links are visible in the application's chart details.
+The calculation and its medical reference links are visible in the application's chart details. Days
+outside the highlighted estimate use a neutral color and an explicit unknown-likelihood label. The
+internal `lower` phase identifier remains for compatibility; it is not a measured risk category. The
+permanent localized notice appears above every tab.
 
 ## Storage, backup, and security
 
@@ -46,10 +53,17 @@ See [DATA_AND_PRIVACY.md](DATA_AND_PRIVACY.md) for formats and [SECURITY.md](../
 reporting. There is no analytics collection in the application code. Initial loads still make
 ordinary host/asset requests and currently fetch external font CSS.
 
+## Hosting boundary
+
+The Worker forwards requests directly to Vinext. Unused database, connector, generated UI, and
+installer scaffolding have been removed. The licensed Sites Vite integration, Cloudflare build
+configuration, and managed execution-profile support remain for the existing deployment. Framework
+migration is deferred; this milestone preserves the current runtime.
+
 ## Testing limits
 
-Node tests exercise pure calculations, backup validation, simulated service-worker behavior, and
-release guards. CI also checks types, lint, formatting, documentation links, and a production/PWA
-build. DOM interactions, visual layout, accessibility with real assistive technology, and
-physical-device installation require manual validation. Unit checks and file-presence checks do not
-establish clinical accuracy or prove real offline installation.
+Node tests exercise pure calculations, backup validation, reminder timing, simulated service-worker
+behavior, and release guards. Playwright exercises a built Worker on desktop and emulated mobile
+Chromium, including real service-worker offline reloads. CI requires both suites and a production
+build. See [TESTING.md](TESTING.md). Physical-device installation, visual review, real assistive
+technology, and clinical accuracy remain outside automated coverage.

@@ -2003,9 +2003,9 @@ dialog:has(.install-panel) .install-panel:first-of-type {
   color: #79588e;
 }
 .phase-lower {
-  background: #e9efde;
-  border-color: #dfe6d3;
-  color: #819365;
+  background: #eeece7;
+  border-color: #dfdcd4;
+  color: #676357;
 }
 .phase-unknown {
   background: #f0f0eb;
@@ -2313,8 +2313,8 @@ dialog:has(.install-panel) .install-panel:first-of-type {
   color: #8f74a2;
 }
 .date.calendar-phase-lower:not(.logged):not(.predicted) {
-  background: #f1f5ea;
-  color: #8b987a;
+  background: #f0eee9;
+  color: #676357;
 }
 .calendar-ovulation {
   position: absolute;
@@ -2722,7 +2722,7 @@ dialog:has(.install-panel) .install-panel:first-of-type {
   --ring-color: #a184b4;
 }
 .cycle-card.hero-phase-lower {
-  --ring-color: #8b9e70;
+  --ring-color: #968c79;
 }
 .cycle-card.hero-phase-unknown {
   --ring-color: #b3ac9b;
@@ -2767,7 +2767,7 @@ dialog:has(.install-panel) .install-panel:first-of-type {
   color: #a28a4d;
 }
 .hero-phase-lower .hero-day-status h2 {
-  color: #74865e;
+  color: #6a6255;
 }
 .hero-day-status p {
   max-width: 200px;
@@ -3025,4 +3025,25 @@ dialog:has(.install-panel) .install-panel:first-of-type {
   .estimate-notice-message {
     font-size: 12px;
   }
+}
+
+.backup-reminder {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: #5d6256;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.backup-reminder strong {
+  font-size: 12px;
+}
+.privacy-card .backup-reminder p {
+  color: #5d6256;
+  font-size: 12px;
+}
+
+.detail-lower .detail-icon {
+  background: #eeece7;
+  color: #676357;
 }

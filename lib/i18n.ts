@@ -4,6 +4,11 @@ const en = {
   estimateNoticeMessage:
     "Cycle and fertile-day estimates are approximate. Do not rely on them to prevent pregnancy. Use reliable contraception.",
   appVersion: "App version",
+  backupReminderTitle: "Keep a copy of your records",
+  backupReminder:
+    "Clearing browser data can erase your records. Download a backup now and at least once a week.",
+  backupPlaintext:
+    "JSON backups are not encrypted. Store them somewhere private; a download alone does not guarantee you have kept a copy.",
   trackingMode: "Calculation mode",
   autoMode: "Automatic",
   manualMode: "Manual",
@@ -26,21 +31,22 @@ const en = {
     period: "Period days\nexpected.",
     fertile: "Higher chance\nof pregnancy.",
     ovulation: "Ovulation\nexpected.",
-    lower: "Lower chance\nof pregnancy.",
+    lower: "Pregnancy chance\nunknown.",
     unknown: "Not enough\ninformation.",
   },
   heroBadges: {
     period: "Period",
     fertile: "Fertile window",
     ovulation: "Ovulation",
-    lower: "Lower likelihood",
+    lower: "Uncertain timing",
     unknown: "Not enough data",
   },
   heroNotes: {
     period: "Estimated from your logged start date and period duration.",
     fertile: "Within the estimated fertile window. The actual timing may vary.",
     ovulation: "A calendar estimate, not confirmation that ovulation has happened.",
-    lower: "Lower estimated likelihood is not a safe day for unprotected sex.",
+    lower:
+      "Outside the highlighted estimate, pregnancy is still possible. A calendar cannot establish safe days.",
     unknown: "Log your latest period start to update the estimate.",
   },
 
@@ -89,7 +95,7 @@ const en = {
   chartPeriod: "Period · estimated",
   chartFertile: "Fertile window · estimated",
   chartOvulation: "Ovulation · estimated",
-  chartLower: "Lower pregnancy likelihood",
+  chartLower: "Pregnancy likelihood unknown",
   chartUnknown: "Not enough information",
   chartPeriodNote:
     "Bleeding dates are estimated from the start date and period duration in Settings.",
@@ -97,7 +103,7 @@ const en = {
     "Pregnancy is more likely around ovulation. The actual timing may differ from this estimate.",
   chartOvulationNote: "This is a calendar estimate, not confirmation that ovulation has happened.",
   chartLowerNote:
-    "Lower estimated likelihood does not mean no pregnancy risk. Do not use this as a safe-day guide.",
+    "This day falls outside the highlighted calendar estimate. Actual fertile days may differ; pregnancy is still possible. Do not use this as a safe-day guide.",
   chartUnknownNote:
     "Log your latest period start date to update this view. Luna does not repeat predictions across missed cycles.",
   chartEmpty: "A little color for your rhythm.",
@@ -231,7 +237,7 @@ const en = {
   dataHint:
     "Data is saved in localStorage on this browser. Clearing browser data will erase it. It does not sync across devices.",
   export: "Export a backup",
-  exported: "Backup downloaded",
+  exported: "Backup download started",
   deleteAll: "Delete all my data",
   resetTitle: "Clear your space?",
   resetText:
@@ -300,6 +306,11 @@ const vi: typeof en = {
   estimateNoticeMessage:
     "Ngày kinh nguyệt và ngày dễ thụ thai chỉ là ước tính. Không dùng kết quả này để tránh thai. Hãy sử dụng biện pháp tránh thai đáng tin cậy.",
   appVersion: "Phiên bản ứng dụng",
+  backupReminderTitle: "Giữ một bản sao dữ liệu",
+  backupReminder:
+    "Xóa dữ liệu trình duyệt có thể làm mất các kỳ đã ghi. Hãy tải bản sao lưu ngay và ít nhất mỗi tuần một lần.",
+  backupPlaintext:
+    "Bản sao lưu JSON không được mã hóa. Hãy cất ở nơi riêng tư; việc tải xuống không đảm bảo bạn đã giữ được bản sao.",
   trackingMode: "Chế độ tính toán",
   autoMode: "Tự động",
   manualMode: "Thủ công",
@@ -322,21 +333,21 @@ const vi: typeof en = {
     period: "Đèn đỏ\ndự kiến.",
     fertile: "Dễ thụ thai\nhơn.",
     ovulation: "Rụng trứng\ndự kiến.",
-    lower: "Khả năng\nthấp hơn.",
+    lower: "Khả năng\nchưa rõ.",
     unknown: "Chưa đủ\ndữ liệu.",
   },
   heroBadges: {
     period: "Đèn đỏ",
     fertile: "Dễ thụ thai",
     ovulation: "Rụng trứng",
-    lower: "Khả năng thấp hơn",
+    lower: "Chưa xác định",
     unknown: "Chưa đủ dữ liệu",
   },
   heroNotes: {
     period: "Ước tính từ ngày bắt đầu và số ngày hành kinh của bạn.",
     fertile: "Trong khoảng dễ thụ thai dự kiến. Thời điểm thực tế có thể thay đổi.",
     ovulation: "Ngày rụng trứng ước tính theo lịch, chưa được xác nhận.",
-    lower: "Khả năng thụ thai dự kiến thấp hơn, không phải ngày an toàn để tránh thai.",
+    lower: "Ngoài vùng dự đoán vẫn có thể mang thai. Lịch không thể xác định ngày an toàn.",
     unknown: "Ghi ngày bắt đầu kỳ kinh gần nhất để cập nhật dự đoán.",
   },
 
@@ -384,7 +395,7 @@ const vi: typeof en = {
   chartPeriod: "Hành kinh · dự kiến",
   chartFertile: "Dễ thụ thai · dự kiến",
   chartOvulation: "Rụng trứng · dự kiến",
-  chartLower: "Khả năng thụ thai thấp hơn",
+  chartLower: "Khả năng thụ thai chưa xác định",
   chartUnknown: "Chưa đủ dữ liệu",
   chartPeriodNote:
     "Ngày hành kinh được ước tính từ ngày bắt đầu và số ngày hành kinh trong Cài đặt.",
@@ -393,7 +404,7 @@ const vi: typeof en = {
   chartOvulationNote:
     "Đây là ngày ước tính theo lịch, không xác nhận bạn đã hoặc sẽ rụng trứng đúng ngày này.",
   chartLowerNote:
-    "Khả năng thấp hơn không có nghĩa là không thể mang thai. Không dùng màu này để xác định ngày quan hệ an toàn.",
+    "Ngày này nằm ngoài vùng dự đoán theo lịch. Ngày dễ thụ thai thực tế có thể khác; bạn vẫn có thể mang thai. Không dùng màu này để xác định ngày an toàn.",
   chartUnknownNote:
     "Hãy ghi ngày bắt đầu kỳ kinh gần nhất để cập nhật. Luna không lặp dự đoán qua các kỳ chưa được ghi lại.",
   chartEmpty: "Một chút màu cho nhịp điệu riêng.",
@@ -527,7 +538,7 @@ const vi: typeof en = {
   dataHint:
     "Dữ liệu lưu bằng localStorage trong trình duyệt này. Xóa dữ liệu trình duyệt sẽ xóa các ghi nhận. Dữ liệu không đồng bộ giữa các thiết bị.",
   export: "Xuất bản sao lưu",
-  exported: "Đã tải bản sao lưu",
+  exported: "Đã bắt đầu tải bản sao lưu",
   deleteAll: "Xóa toàn bộ dữ liệu",
   resetTitle: "Xóa dữ liệu của bạn?",
   resetText:

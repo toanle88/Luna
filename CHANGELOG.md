@@ -6,6 +6,28 @@ been published; see [GitHub Releases](https://github.com/toanle88/Luna/releases)
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-08
+
+### Added
+
+- Playwright production-browser tests for desktop and emulated mobile Chromium, including logging,
+  editing/deleting, validated restore/export, both locales, storage errors, and offline reloads.
+- Quiet weekly backup reminders and clearer plaintext/local-storage durability guidance.
+- Browser checks in CI and release verification, with failure reports and traces.
+
+### Changed
+
+- Split the main page into focused components and separate controller/file-transfer hooks.
+- Use neutral colors and explicit unknown-likelihood wording outside the highlighted estimate.
+- Improve dialog accessible names and update architecture, contribution, testing, and release docs.
+
+### Removed
+
+- Unused generated UI, database, connector, and installer scaffolding and their dependencies.
+
+Period calculations, start-date-only logging, record/backup schemas, and the current framework are
+preserved. Reminder activity is optional metadata stored separately from records.
+
 ## [0.1.2] - 2026-11-08
 
 ### Fixed

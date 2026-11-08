@@ -15,6 +15,7 @@ contraception.**
 - Choose automatic estimates from history or save your own manual cycle settings.
 - Inspect a calendar and interactive cycle chart with estimated phases.
 - Export JSON backups and preview validated data before restoring it.
+- Get a quiet weekly backup reminder when records have no recent export or restore activity.
 - Install the app and use its cached shell offline after an online visit.
 - Keep cycle records in this browser's localStorage, without an account or shared database.
 
@@ -38,20 +39,22 @@ For Vietnamese instructions, see [Hướng dẫn chạy](HUONG-DAN-CHAY.md).
 
 ## Development commands
 
-| Command              | Purpose                                                        |
-| -------------------- | -------------------------------------------------------------- |
-| `pnpm dev`           | Development server                                             |
-| `pnpm format`        | Format maintained source and docs                              |
-| `pnpm format:check`  | Check formatting without changing files                        |
-| `pnpm lint`          | ESLint with zero warnings allowed                              |
-| `pnpm typecheck`     | Strict TypeScript checks                                       |
-| `pnpm test`          | Discover and run Node test files                               |
-| `pnpm test:watch`    | Rerun tests while editing                                      |
-| `pnpm docs:check`    | Check local Markdown links                                     |
-| `pnpm check`         | Formatting, lint, types, tests, and documentation              |
-| `pnpm build`         | Production build, offline asset generation, and PWA validation |
-| `pnpm start`         | Serve the production Worker locally through Wrangler           |
-| `pnpm release:check` | Validate the current version and dated changelog entry         |
+| Command              | Purpose                                                                |
+| -------------------- | ---------------------------------------------------------------------- |
+| `pnpm dev`           | Development server                                                     |
+| `pnpm format`        | Format maintained source and docs                                      |
+| `pnpm format:check`  | Check formatting without changing files                                |
+| `pnpm lint`          | ESLint with zero warnings allowed                                      |
+| `pnpm typecheck`     | Strict TypeScript checks                                               |
+| `pnpm test`          | Discover and run Node test files                                       |
+| `pnpm test:e2e`      | Browser workflows against a production build (desktop/mobile Chromium) |
+| `pnpm test:e2e:ui`   | Open the interactive Playwright test runner                            |
+| `pnpm test:watch`    | Rerun tests while editing                                              |
+| `pnpm docs:check`    | Check local Markdown links                                             |
+| `pnpm check`         | Formatting, lint, types, tests, and documentation                      |
+| `pnpm build`         | Production build, offline asset generation, and PWA validation         |
+| `pnpm start`         | Serve the production Worker locally through Wrangler                   |
+| `pnpm release:check` | Validate the current version and dated changelog entry                 |
 
 ## Production and PWA
 
@@ -77,7 +80,8 @@ duration estimates. The normal logging form still needs only a start date.
 
 Records are specific to the browser and origin. Clearing browser storage removes them. To move
 records, use **Settings → Backup & restore → Export JSON**, then import the file in the new
-instance. Imports replace existing records only after an explicit confirmation.
+instance. Imports replace existing records only after an explicit confirmation. Backups are
+unencrypted JSON; store them privately and check that the downloaded file is retained.
 
 See [data and privacy](docs/DATA_AND_PRIVACY.md) for schema compatibility, backup handling, network
 requests, and the limits of local storage.
@@ -99,8 +103,13 @@ requests and pushes to `main`.
 
 Luna is an early **0.x** open-source application using React, TypeScript, and the beta Vinext
 framework. Its automated suite covers date calculations, estimation, backup validation,
-service-worker behavior, and release guards. Browser and physical-device PWA installation checks
+service-worker behavior, release guards, and browser workflows on desktop and emulated mobile
+Chromium. Physical-device installation, assistive-technology checks, and real-world validation
 remain manual; passing CI is not clinical validation.
+
+For browser tests, run `pnpm exec playwright install chromium`, then `pnpm build` and
+`pnpm test:e2e`. Linux hosts may also need `pnpm exec playwright install --with-deps chromium`. See
+[testing](docs/TESTING.md) for coverage and limitations.
 
 ## License
 

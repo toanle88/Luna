@@ -6,6 +6,8 @@
 pnpm install --frozen-lockfile
 pnpm check
 pnpm build
+pnpm exec playwright install chromium
+pnpm test:e2e
 pnpm start
 ```
 
@@ -27,9 +29,8 @@ Sites publication remains managed separately. Pushing this repository, running C
 GitHub release does not automatically update the hosted app. Do not reuse the original project
 identity when creating an unrelated deployment.
 
-No cycle-record database or application secret is required for the tracker. The retained starter
-includes optional connector/database scaffolding that the tracker does not use. Read the
-[original starter documentation](STARTER-README.md) before changing those integrations.
+No cycle-record database, connector binding, or application secret is required for the tracker.
+Unused starter integrations have been removed; the Sites hosting integration remains.
 
 ## Manual PWA check
 
@@ -47,4 +48,4 @@ Use a production build on localhost or HTTPS:
    replacement only after confirmation.
 
 Also check keyboard focus, mobile layout, both locales, and storage-denied/full behavior. Automated
-cache simulations and build checks do not replace these device checks.
+Chromium tests cover offline reloads and core workflows, but do not replace these device checks.

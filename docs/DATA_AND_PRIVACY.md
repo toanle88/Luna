@@ -46,6 +46,19 @@ intact. The current dataset can be exported before replacement.
 Never use real backups as public fixtures or attach them to issues. Synthetic examples are enough to
 reproduce date/validation problems.
 
+## Backup reminders
+
+If records exist, Luna shows a compact inline reminder until a backup download is started or a
+restore succeeds, and again after seven days. `luna-backup-activity-v1` stores only that activity's
+ISO timestamp in a separate localStorage key. This optional UI metadata is excluded from menstrual
+records and JSON exports. Clearing all records clears it too. Failure to read or write reminder
+metadata does not block record storage or a backup.
+
+A download event cannot confirm that a file was retained or saved successfully. Check the downloaded
+file, store it somewhere private, and keep copies outside the browser. Clearing browser data,
+uninstalling, or changing devices/origins can remove access to records. Backups remain plaintext;
+password-protected exports are deferred and no encryption is claimed.
+
 ## Changing schemas
 
 Storage schema versions, backup envelope versions, and package release versions are separate. A

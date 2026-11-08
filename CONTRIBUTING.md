@@ -16,7 +16,8 @@ real cycle histories.
    `feat/calendar-navigation`, `fix/backup-validation`, or `docs/setup`.
 2. Make one coherent change. Add a regression test for changed calculations or data handling; avoid
    tests that merely repeat implementation details.
-3. Run `pnpm check` and `pnpm build`.
+3. Run `pnpm check`, `pnpm build`, and `pnpm test:e2e` (install Chromium first; see
+   [testing](docs/TESTING.md)).
 4. Update user/developer docs and the `Unreleased` section of [CHANGELOG.md](CHANGELOG.md) when
    relevant.
 5. Open a pull request with a clear trigger, before/after behavior, validation, and compatibility
@@ -52,7 +53,8 @@ CI does not lint every commit message.
 - For PWA changes, use the production build and the
   [deployment checklist](docs/DEPLOYMENT.md#manual-pwa-check).
 
-The test runner discovers every `tests/*.test.mjs` file. New test files are included automatically.
+The unit runner discovers every `tests/*.test.mjs` file. Playwright discovers `e2e/*.spec.ts`. New
+files in those locations are included automatically.
 
 ## Coding and dependencies
 
@@ -61,8 +63,7 @@ Follow [CODING_STANDARD.md](docs/CODING_STANDARD.md). `pnpm format` applies the 
 upgrade the beta framework, React integration, or lint plugins independently without checking their
 peer compatibility.
 
-Generated shadcn UI and upstream assets retain scoped exceptions and licenses. Avoid unrelated edits
-to them.
+The vendored Sites build integration retains its upstream license. Keep changes to it focused.
 
 ## Reporting a vulnerability
 

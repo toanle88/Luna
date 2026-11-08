@@ -52,10 +52,36 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
+  e2e:
+    name: Browser tests (desktop and mobile)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm build
+      - run: pnpm test:e2e
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        if: failure()
+        with:
+          name: browser-test-failures
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
   quality-gate:
     name: Quality gate
     if: always()
-    needs: [quality, build]
+    needs: [quality, build, e2e]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -63,6 +89,8 @@ jobs:
         env:
           QUALITY_RESULT: ${{ needs.quality.result }}
           BUILD_RESULT: ${{ needs.build.result }}
+          E2E_RESULT: ${{ needs.e2e.result }}
         run: |
           test "$QUALITY_RESULT" = success
           test "$BUILD_RESULT" = success
+          test "$E2E_RESULT" = success

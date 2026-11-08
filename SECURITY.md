@@ -4,7 +4,7 @@
 
 | Version         | Status                        |
 | --------------- | ----------------------------- |
-| Latest `0.1.x`  | Best-effort fixes             |
+| Latest `0.2.x`  | Best-effort fixes             |
 | Older snapshots | Upgrade to the latest release |
 
 This is an early open-source project without a guaranteed response time or security certification.

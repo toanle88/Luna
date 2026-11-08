@@ -32,7 +32,7 @@ also summarize merged PRs.
 
 3. Move the relevant changelog entries into `## [X.Y.Z] - YYYY-MM-DD`, using the actual release
    date. Keep an empty `Unreleased` section.
-4. Run `pnpm check`, `pnpm build`, and `pnpm release:check`.
+4. Run `pnpm check`, `pnpm build`, `pnpm test:e2e`, and `pnpm release:check`.
 5. Commit the version/changelog changes and merge the reviewed pull request after CI passes.
 
 The initial `0.1.0` entry is already prepared; it is not a claim that its release tag has been
@@ -51,8 +51,9 @@ git push origin vX.Y.Z
 
 Replace `X.Y.Z` with the version in `package.json`. The tag workflow installs from the frozen
 lockfile, runs all checks, verifies the tag against package.json and a dated changelog entry, and
-builds production/PWA assets. Only then does a separate job with `contents: write` publish a GitHub
-Release with generated notes. Other jobs keep read-only repository access.
+builds production/PWA assets, and runs Chromium browser tests on desktop and emulated mobile. Only
+then does a separate job with `contents: write` publish a GitHub Release with generated notes. Other
+jobs keep read-only repository access.
 
 A failed validation does not create a release. Fix the preparation on a new commit; if no release
 was published, investigate the failed tag before deciding how to recover. Never force-update an

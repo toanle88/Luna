@@ -29,16 +29,16 @@ CI repeats the checks from a frozen lockfile.
 
 ## Narrow exceptions
 
-Two client bootstrap effects synchronize browser-only storage and PWA capabilities after server
-rendering. Their `react-hooks/set-state-in-effect` exceptions are scoped and explained in source. Do
-not spread those exceptions to ordinary derived state or use timers merely to bypass a lint rule.
+Client bootstrap effects synchronize browser-only records, optional backup activity, and PWA
+capabilities after server rendering. Their `react-hooks/set-state-in-effect` exceptions are scoped
+and explained in source. Do not spread those exceptions to ordinary derived state or use timers
+merely to bypass a lint rule.
 
 Ambient declaration files allow inline `import()` type references so virtual-module and global
 declarations remain global scripts. Ordinary TypeScript files require type imports.
 
-Generated shadcn UI has scoped upstream-rule exceptions. Prettier excludes generated UI, upstream
-assets, lockfiles, and build/runtime output. Those exclusions do not apply to Luna's feature
-components or business logic.
+Prettier excludes the licensed Sites integration, lockfile, and build/runtime/test output. Those
+exclusions do not apply to Luna's feature components or business logic.
 
 ## Dependencies and generated files
 
@@ -49,4 +49,4 @@ that coordinated upgrade through dependency review.
 
 Do not manually edit lockfile resolutions, generated PWA output in `dist/`, or runtime caches.
 Preserve vendor licenses. Dependency updates must pass a clean install, `pnpm check`, and
-`pnpm build`.
+`pnpm build`, and the browser suite when runtime behavior is affected.

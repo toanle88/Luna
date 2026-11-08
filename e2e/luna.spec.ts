@@ -1,6 +1,9 @@
 import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
-import { version } from "../package.json";
+const { version } = JSON.parse(
+  readFileSync(new URL("../package.json", import.meta.url), "utf8"),
+) as { version: string };
 import { translations } from "../lib/i18n";
 import type { LunaData } from "../lib/backup";
 import { STORAGE_KEY } from "../lib/storage";

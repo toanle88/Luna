@@ -2943,3 +2943,25 @@ dialog:has(.install-panel) .install-panel:first-of-type {
     font-size: 23px;
   }
 }
+
+.app-version {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: #7d856f;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.app-version > span:last-child {
+  white-space: nowrap;
+}
+.app-version code {
+  margin-left: 5px;
+  font-family: inherit;
+  color: #62704f;
+  font-weight: 500;
+}

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { version as appVersion } from "../package.json";
 import {
   useEffect,
   useRef,
@@ -1030,6 +1031,12 @@ export default function Home() {
             </button>
           </div>
           <InstallPanel locale={locale} pwa={pwa} />
+          <div className="app-version">
+            <span>{t.appVersion}</span>
+            <span>
+              Luna <code>v{appVersion}</code>
+            </span>
+          </div>
         </Modal>
       )}
       {modal === "reset" && (

@@ -1,5 +1,6 @@
 export type Locale = "vi" | "en";
 const en = {
+  appVersion: "App version",
   trackingMode: "Calculation mode",
   autoMode: "Automatic",
   manualMode: "Manual",
@@ -292,6 +293,7 @@ const en = {
     "After the first online visit, your calendar and cycle chart can work offline. Data stays in this browser’s storage.",
 };
 const vi: typeof en = {
+  appVersion: "Phiên bản ứng dụng",
   trackingMode: "Chế độ tính toán",
   autoMode: "Tự động",
   manualMode: "Thủ công",

@@ -6,6 +6,13 @@ been published; see [GitHub Releases](https://github.com/toanle88/Luna/releases)
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-08
+
+### Fixed
+
+- Show the application version in Settings in Vietnamese and English, sourced directly from package
+  metadata so the displayed value stays aligned with future version bumps.
+
 ## [0.1.0] - 2026-11-08
 
 ### Added

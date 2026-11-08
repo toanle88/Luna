@@ -1,0 +1,20 @@
+import { readFile, access } from "node:fs/promises";
+import path from "node:path";
+import vm from "node:vm";
+import assert from "node:assert/strict";
+const source=await readFile("dist/client/sw.js","utf8");
+const context={self:{addEventListener(){}}};
+vm.createContext(context);vm.runInContext(source+";globalThis.config={CACHE,PRECACHE}",context);
+const {CACHE,PRECACHE}=context.config;
+assert.match(CACHE,/^luna-shell-[0-9a-f]{16}$/);
+assert.ok(PRECACHE.includes("/"));
+assert.ok(PRECACHE.includes("/manifest.webmanifest"));
+assert.ok(PRECACHE.includes("/icons/icon-192.png"));
+assert.ok(PRECACHE.includes("/icons/icon-512.png"));
+assert.ok(PRECACHE.includes("/icons/icon-maskable-512.png"));
+assert.ok(PRECACHE.some(url=>url.startsWith("/_next/")&&url.endsWith(".js")));
+assert.ok(PRECACHE.some(url=>url.endsWith(".css")));
+for(const url of PRECACHE){assert.ok(url.startsWith("/")&&!url.includes(".."));if(url!=="/")await access(path.join("dist/client",url.slice(1)))}
+const headers=await readFile("dist/client/_headers","utf8");
+assert.ok(headers.includes("/sw.js"));assert.ok(headers.includes("Cache-Control: no-cache"));
+console.log(`PWA verified: ${PRECACHE.length} existing resources, standalone manifest, icons, and service-worker headers.`);

@@ -187,6 +187,22 @@ test("historical cycle lengths use logged next starts, and a new log resets cycl
   assert.equal(next.start, "2026-11-27");
   assert.equal(phaseAt(next, "2026-11-27").day, 1);
 });
+test("an early recorded start replaces the unfinished cycle and survives record order changes", () => {
+  const early = { id: "early", start: "2026-11-23", end: null, autoEnd: true };
+  const records = normalizePeriods([{ ...startPeriod, end: null }, early], 31);
+  assert.equal(periodEnd(records[0], 31), "2026-11-22");
+  for (const periods of [records, [...records].reverse()]) {
+    const previous = projectionForDate(periods, "2026-11-22", 25, 31);
+    assert.equal(previous.start, "2026-11-01");
+    assert.equal(previous.end, "2026-11-22");
+    const current = projectionForDate(periods, "2026-11-25", 25, 31);
+    assert.equal(current.start, "2026-11-23");
+    assert.equal(current.nextStart, "2026-12-18");
+    assert.equal(phaseAt(current, "2026-11-23").day, 1);
+    assert.equal(phaseAt(current, "2026-11-25").day, 3);
+    assert.equal(phaseAt(current, "2026-11-25").phase, "period");
+  }
+});
 test("overlapping period and fertility predictions retain both labels", () => {
   const model = projectCycle(startPeriod, 28, 14);
   const state = phaseAt(model, "2026-11-14");

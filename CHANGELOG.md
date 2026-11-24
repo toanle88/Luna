@@ -6,6 +6,13 @@ been published; see [GitHub Releases](https://github.com/toanle88/Luna/releases)
 
 ## [Unreleased]
 
+### Fixed
+
+- Return the calendar and cycle overview to today after saving a period, so an early new start
+  immediately replaces a previously selected day in the older cycle.
+- Show the recorded period start in the overview for elapsed period days, while keeping the end date
+  and future days explicitly estimated in Vietnamese and English.
+
 ## [0.2.0] - 2026-11-08
 
 ### Added

@@ -27,6 +27,7 @@ export function CycleOverview({
   | "selectedPhase"
   | "openPeriod"
 >) {
+  const loggedPeriod = selectedPhase.phase === "period" && selected <= today && selectedModel;
   return (
     <section className={`cycle-card hero-phase-${selectedPhase.phase}`}>
       <div className="cycle-top">
@@ -57,10 +58,10 @@ export function CycleOverview({
         <div className="cycle-description hero-day-status" aria-live="polite">
           <span className="small-label">
             {selected === today ? t.today : fmt(selected, { day: "numeric", month: "short" })} ·{" "}
-            {t.chartEstimated}
+            {loggedPeriod ? t.heroLoggedStart(fmt(loggedPeriod.start)) : t.chartEstimated}
           </span>
-          <h2>{t.heroPhases[selectedPhase.phase]}</h2>
-          <p>{t.heroNotes[selectedPhase.phase]}</p>
+          <h2>{loggedPeriod ? t.heroLoggedPeriod : t.heroPhases[selectedPhase.phase]}</h2>
+          <p>{loggedPeriod ? t.heroLoggedNote : t.heroNotes[selectedPhase.phase]}</p>
           {selectedPhase.menstruating && selectedPhase.phase !== "period" && (
             <span className="hero-overlap">
               <Droplet size={11} />

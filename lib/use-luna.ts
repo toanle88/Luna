@@ -211,7 +211,12 @@ export function useLuna() {
       setError("periodOverlap");
       return;
     }
-    if (save(candidate, t.savedPeriod)) setModal(null);
+    if (save(candidate, t.savedPeriod)) {
+      // The new record supersedes the previous cycle even when it starts early.
+      // Return to today so a previously selected historical day cannot hide it.
+      selectDate(today);
+      setModal(null);
+    }
   }
   function saveSettings(e: FormEvent) {
     e.preventDefault();

@@ -27,6 +27,9 @@ const en = {
   autoEndHelpAuto: (n: number) =>
     `End date estimated from ${n} period days currently used by automatic mode. Generated end dates are not used to learn future durations.`,
 
+  heroLoggedPeriod: "Your period\nhas started.",
+  heroLoggedStart: (date: string) => `Logged start: ${date}`,
+  heroLoggedNote: "The end date is still estimated from your period duration.",
   heroPhases: {
     period: "Period days\nexpected.",
     fertile: "Higher chance\nof pregnancy.",
@@ -329,6 +332,9 @@ const vi: typeof en = {
   autoEndHelpAuto: (n: number) =>
     `Ngày kết thúc ước tính theo ${n} ngày hành kinh đang được chế độ tự động sử dụng. Các ngày tự dự đoán không dùng để học thời lượng mới.`,
 
+  heroLoggedPeriod: "Kỳ kinh\nđã bắt đầu.",
+  heroLoggedStart: (date: string) => `Bắt đầu ${date} · Đã ghi nhận`,
+  heroLoggedNote: "Ngày kết thúc vẫn được ước tính theo số ngày hành kinh của bạn.",
   heroPhases: {
     period: "Đèn đỏ\ndự kiến.",
     fertile: "Dễ thụ thai\nhơn.",
